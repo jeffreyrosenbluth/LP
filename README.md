@@ -1,0 +1,2 @@
+# CFR
+counterfactual regret minimization
