@@ -1,4 +1,3 @@
-module LP03
 #=
 Counterfactual regret minimizaiont
 - Chance sampling
@@ -197,5 +196,3 @@ function train(profile, filename=nothing)
     end
     profile
 end
-
-end #module

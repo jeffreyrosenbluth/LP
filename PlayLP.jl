@@ -1,7 +1,4 @@
-using Printf
-
-include("LP03.jl")
-using .LP03
+include("CFRcs.jl")
 
 botprofile = Botprofile(1000, 2, 3, 7, 2, 4)
 
