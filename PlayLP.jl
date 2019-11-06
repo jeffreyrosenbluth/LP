@@ -61,8 +61,7 @@ function headsup(dict1, dict2, hands)
     hist = UInt8[]
     player = rand(1:2)
     while true
-        mv = player == 1 ? move(dict1, hands[1, :], hist) :
-             move(dict2, hands[2, :], hist)
+        mv = player == 1 ? move(dict1, hands[1, :], hist) : move(dict2, hands[2, :], hist)
         push!(hist, mv)
         if mv == 1
             w = win(hist, hands)
@@ -137,12 +136,7 @@ function games(policys)
     while true
         n += 1
         score += play(policys)
-        @printf(
-            "Total: %.0f, Games: %.0f, Average: %.2f\n",
-            score,
-            n,
-            score / n,
-        )
+        @printf("Total: %.0f, Games: %.0f, Average: %.2f\n", score, n, score / n)
         println("======================================")
         println()
         @printf("Hand %.0f\n", n + 1)

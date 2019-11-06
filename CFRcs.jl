@@ -1,5 +1,5 @@
 #=
-Counterfactual regret minimizaiont
+Counterfactual regret minimizaion
 - Chance sampling
 - Pruning
 - Imperfect recall
