@@ -1,3 +1,7 @@
+#=
+Low level utilityies for dealing with bid sequences.
+=#
+
 import Base: isequal
 
 const bitlen = 8
@@ -39,12 +43,39 @@ Base.zero(UInt256) = UInt256(0)
 Base.one(x::UInt256) = UInt256(1)
 Base.one(UInt256) = UInt256(1)
 
-peek(x::UInt256, b::UInt8) = isless(UInt256(0,0), UInt256(0,1) << b & x)
+peek(x, b) = isless(zero(x), one(x) << UInt8(b) & x)
 
 togglebit(x::UInt256, b::UInt8) = x ⊻ (UInt256(0,1) << b)
 
+function lastbid(hist::UInt256)
+    if hist == zero(UInt256)
+        return (0, 0)
+    end
+    if hist.h > zero(UInt128)
+        i = UInt8(255)
+        x = hist.h
+    else
+        i = UInt8(127)
+        x = hist.l
+    end
+    while !peek(x, 127)
+        x  = x << 0x1
+        i -= 0x1
+    end
+    index2bid(i)
+end
 
-addbid(hist::UInt256, n, r) = togglebit(hist, bid2index(n, r))
+function addbid(hist::UInt256, n, r)
+    (q, p) = lastbid(hist)
+    if n == 0 && q != 0
+        return togglebit(hist, bid2index(q, p) + 0x1)
+    elseif n != 0
+        return togglebit(hist, bid2index(n, r))
+    else
+        error("Cannot challenge a challenge")
+    end
+end
+
 addbid(hist::UInt256, b::Integer) = addbid(hist, parsebid(b)...)
 
 function bidindices(hist::UInt256)

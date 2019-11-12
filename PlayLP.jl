@@ -1,6 +1,6 @@
 include("CFRcs.jl")
 
-botprofile = Botprofile(1000, 2, 3, 7, 2, 4)
+botprofile = Botprofile(1000, 3, 3, 7, 2, 4)
 
 function samp(probdict)
     s = rand()

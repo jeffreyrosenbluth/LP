@@ -31,8 +31,11 @@ end;
 @testset "Bidding" begin
     @test bid2index(2,1) == 0x16
     @test index2bid(0x16) == (2,1)
-    @test index2bid(0x17) == 0
+    @test index2bid(0x17) == (0, 0)
     @test parsebid(42) == (4,2)
     @test addbid(x0, 3, 7) == addbid(x0, 37)
     @test addbid(UInt256(0), 1, 0) == UInt256(0, 1)
+    x = addbid(addbid(zero(UInt256), 20), 21)
+    println(bidhistory(x))
+
 end;
