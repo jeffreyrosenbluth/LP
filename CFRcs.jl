@@ -61,6 +61,15 @@ mutable struct Botprofile
     end
 end
 
+function Base.show(io::IO, profile::Botprofile)
+    @printf(io, "Samples:                   %.0f\n", profile.num_samples)
+    @printf(io, "Cards per hand:            %.0f\n", profile.cards_per_hand)
+    @printf(io, "Number of ranks:           %.0f\n", profile.num_ranks)
+    @printf(io, "Max history:               %.0f\n", profile.max_history)
+    @printf(io, "Minimum bid qunatitiy:     %.0f\n", profile.min_bid_quant)
+    @printf(io, "Maximum bid qunatitiy:     %.0f\n", profile.max_bid_quant)
+end
+
 function mkbids(min_quant, max_quant, ranks)
     m = UInt8(min_quant)
     n = UInt8(max_quant)
