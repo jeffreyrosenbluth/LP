@@ -8,9 +8,7 @@ using Random, Distributions, Printf
 using Profile, BenchmarkTools
 using Serialization
 
-export quant,
-       ranks,
-       randhands!,
+export randhands!,
        key,
        Key,
        actions,
